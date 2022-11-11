@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import apiService from "../app/apiService";
 import orderBy from "lodash/orderBy";
 import LoadingScreen from "../components/LoadingScreen";
+import { filter } from "lodash";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -102,10 +103,13 @@ function applyFilter(products, filters) {
   }
 
   // FILTER PRODUCTS
-  if (filters.gender.length > 0) {
-    filteredProducts = products.filter((product) =>
-      filters.gender.includes(product.gender)
-    );
+  console.log(filters.gender);
+  if (typeof filters.gender !== "undefined") {
+    if (filters.gender.length > 0) {
+      filteredProducts = products.filter((product) =>
+        filters.gender.includes(product.gender)
+      );
+    }
   }
   if (filters.category !== "All") {
     filteredProducts = products.filter(
